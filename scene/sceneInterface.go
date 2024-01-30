@@ -6,5 +6,5 @@ type Scene interface {
 	// updates scene
 	Update()
 	// draws scene to target
-	Draw(target *rl.RenderTexture2D)
+	Render(target rl.RenderTexture2D)
 }

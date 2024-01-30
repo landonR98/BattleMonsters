@@ -52,7 +52,8 @@ func (startMenu *StartMenu) Update() {
 
 }
 
-func (startMenu *StartMenu) Draw(target *rl.RenderTexture2D) {
+func (startMenu *StartMenu) Render(target rl.RenderTexture2D) {
+	rl.BeginTextureMode(target)
 
 	rl.ClearBackground(rl.RayWhite)
 
@@ -66,6 +67,7 @@ func (startMenu *StartMenu) Draw(target *rl.RenderTexture2D) {
 		fmt.Println("settings")
 	}
 
+	rl.EndTextureMode()
 }
 
 func start() {

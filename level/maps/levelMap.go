@@ -31,7 +31,6 @@ func NewLevelMap(tiledMap *TiledMap) *LevelMap {
 		row := make([]int, tiledMap.Width)
 		for j := 0; j < tiledMap.Width; j++ {
 			row[j] = tiledMap.Layers[0].Data[(tiledMap.Height*i)+j]
-			// row[j] = 0
 		}
 		tileMap[i] = row
 	}
@@ -47,8 +46,6 @@ func NewLevelMap(tiledMap *TiledMap) *LevelMap {
 	for i, row := range tileMap {
 		for j, tileId := range row {
 			tiles.DrawTile(tileId-1, j*tileHeight, i*tileWidth)
-			// _ = tileId
-			// tiles.DrawTile(0, i*tileWidth, j*tileHeight)
 		}
 	}
 

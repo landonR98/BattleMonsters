@@ -31,9 +31,8 @@ func main() {
 		windowManager.Update()
 
 		target := windowManager.GetTarget()
-		rl.BeginTextureMode(target)
-		sceneManager.GetCurrent().Draw(&target)
-		rl.EndTextureMode()
+
+		sceneManager.GetCurrent().Render(target)
 
 		rl.BeginDrawing()
 		windowManager.Draw()

@@ -39,9 +39,12 @@ func (levelScene *LevelScene) Update() {
 	fmt.Println(levelScene.position)
 }
 
-func (levelScene *LevelScene) Draw(target *rl.RenderTexture2D) {
+func (levelScene *LevelScene) Render(target rl.RenderTexture2D) {
+	rl.BeginTextureMode(target)
 
 	rl.ClearBackground(rl.RayWhite)
 
 	levelScene.levelMap.Draw()
+
+	rl.EndTextureMode()
 }
