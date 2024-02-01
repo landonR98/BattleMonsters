@@ -1,19 +1,15 @@
 package maps
 
 import (
-	"battleMonsters/window"
 	"fmt"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 type LevelMap struct {
-	tileMap    [][]int
-	texture    rl.RenderTexture2D
+	texture    rl.Texture2D
 	sourceRect rl.Rectangle
 	destRect   rl.Rectangle
-	tiles      *TileSet
-	cameraZoom float32
 }
 
 func (LevelMap) Foo() {
@@ -51,14 +47,10 @@ func NewLevelMap(tiledMap *TiledMap) *LevelMap {
 
 	rl.EndTextureMode()
 
-	cameraZoom := float32(5)
-
 	return &LevelMap{
-		tileMap:    tileMap,
-		tiles:      tiles,
-		texture:    texture,
-		sourceRect: rl.NewRectangle(0, 0, window.GameWidth/cameraZoom, -window.GameHeight/cameraZoom),
-		destRect:   rl.NewRectangle(0, 0, window.GameWidth, window.GameHeight),
+		texture:    texture.Texture,
+		sourceRect: rl.NewRectangle(0, 0, float32(texture.Texture.Width), -float32(texture.Texture.Height)),
+		destRect:   rl.NewRectangle(0, 0, float32(texture.Texture.Width), float32(texture.Texture.Height)),
 	}
 }
 
@@ -67,6 +59,17 @@ func (levelMap *LevelMap) Move(x float32, y float32) {
 	levelMap.sourceRect.Y = y + (levelMap.sourceRect.Height)
 }
 
-func (levelMap *LevelMap) Draw() {
-	rl.DrawTexturePro(levelMap.texture.Texture, levelMap.sourceRect, levelMap.destRect, rl.NewVector2(0, 0), 0, rl.White)
+func (levelMap *LevelMap) Redraw() {
+	rl.DrawTexturePro(levelMap.texture, levelMap.sourceRect, levelMap.destRect, rl.NewVector2(0, 0), 0, rl.White)
+}
+
+func (levelMap *LevelMap) CopyRenderTexture() rl.RenderTexture2D {
+	texture := rl.LoadRenderTexture(levelMap.texture.Width, levelMap.texture.Height)
+	rl.BeginTextureMode(texture)
+
+	rl.DrawTexture(levelMap.texture, 0, 0, rl.White)
+
+	rl.EndTextureMode()
+
+	return texture
 }
