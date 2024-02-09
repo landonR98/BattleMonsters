@@ -6,18 +6,32 @@ import (
 	"os"
 )
 
+type MapLayer struct {
+	Data    []int `json:"data"`
+	Objects []struct {
+		Height float32 `json:"height"`
+		Width  float32 `json:"width"`
+		X      float32 `json:"x"`
+		Y      float32 `json:"y"`
+	} `json:"objects"`
+	Type   string `json:"type"`
+	Name   string `json:"name"`
+	Height int    `json:"height"`
+	Width  int    `json:"width"`
+}
+
+type TileSetSource struct {
+	FirstGID int    `json:"firstgid"`
+	Source   string `json:"source"`
+}
+
 type TiledMap struct {
-	Height int `json:"height"`
-	Width  int `json:"width"`
-	Layers []struct {
-		Data []int `json:"data"`
-	} `json:"layers"`
-	TileHeight int `json:"tileheight"`
-	TileWidth  int `json:"tilewidth"`
-	TileSets   []struct {
-		FirstGID int    `json:"firstgid"`
-		Source   string `json:"source"`
-	} `json:"tilesets"`
+	Height     int             `json:"height"`
+	Width      int             `json:"width"`
+	Layers     []MapLayer      `json:"layers"`
+	TileHeight int             `json:"tileheight"`
+	TileWidth  int             `json:"tilewidth"`
+	TileSets   []TileSetSource `json:"tilesets"`
 }
 
 func LoadMapFromFile(filepath string) (*LevelMap, error) {

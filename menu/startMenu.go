@@ -71,7 +71,7 @@ func (startMenu *StartMenu) Render(target rl.RenderTexture2D) {
 }
 
 func start() {
-	levelMap, err := maps.LoadMapFromFile("./resources/maps/map2.tmj")
+	levelMap, err := maps.LoadMapFromFile("./resources/maps/grassMap.tmj")
 	if err != nil {
 		fmt.Println(err)
 		return

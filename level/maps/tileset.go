@@ -1,6 +1,10 @@
 package maps
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	"strings"
+
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
 
 type TileSet struct {
 	tilesWide  int
@@ -9,18 +13,22 @@ type TileSet struct {
 	texture    rl.Texture2D
 	sourceRect rl.Rectangle
 	destRect   rl.Rectangle
+	offset     int
 }
 
-func NewTileSet() *TileSet {
-	image := rl.LoadImage("./resources/tileSets/TileSet.png")
+func NewTileSet(source TileSetSource, tileWidth int, tileHeight int) *TileSet {
+	img := strings.Split(source.Source, ".")[0] + ".png"
+
+	image := rl.LoadImage("./resources/tileSets/" + img)
 	texture := rl.LoadTextureFromImage(image)
 	return &TileSet{
-		tilesWide:  int(texture.Width) / 16,
-		tileHeight: 16,
-		tileWidth:  16,
+		tilesWide:  int(texture.Width) / tileWidth,
+		tileHeight: tileHeight,
+		tileWidth:  tileWidth,
 		texture:    texture,
-		sourceRect: rl.NewRectangle(0, 0, 16, 16),
-		destRect:   rl.NewRectangle(0, 0, 16, 16),
+		sourceRect: rl.NewRectangle(0, 0, float32(tileWidth), float32(tileHeight)),
+		destRect:   rl.NewRectangle(0, 0, float32(tileWidth), float32(tileHeight)),
+		offset:     source.FirstGID,
 	}
 }
 
@@ -31,6 +39,8 @@ func (tileSet *TileSet) TileDimensions() (width int, height int) {
 }
 
 func (tileSet *TileSet) DrawTile(tileID int, x int, y int) {
+	tileID -= tileSet.offset
+
 	tileX := tileID % tileSet.tilesWide * tileSet.tileWidth
 	tileY := (tileID / tileSet.tilesWide) * tileSet.tileHeight
 

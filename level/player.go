@@ -11,7 +11,7 @@ type Player struct {
 	pos      rl.Vector2
 }
 
-func NewPlayer() (player Player) {
+func NewPlayer(pos rl.Vector2) (player Player) {
 	renderTexture := rl.LoadRenderTexture(64, 16)
 
 	rl.BeginTextureMode(renderTexture)
@@ -23,7 +23,7 @@ func NewPlayer() (player Player) {
 	player.texture = renderTexture.Texture
 	player.srcRect = rl.NewRectangle(0, 0, 16, -16)
 	player.destRect = rl.NewRectangle(0, 0, 16, 16)
-	player.pos = rl.NewVector2(150, 150)
+	player.pos = pos
 
 	return player
 }
@@ -57,4 +57,8 @@ func (player *Player) Update() {
 	player.destRect.X = player.pos.X - (player.srcRect.Width / float32(2))
 	player.destRect.Y = player.pos.Y + (player.srcRect.Height / float32(2))
 
+}
+
+func (p *Player) SetPos(pos rl.Vector2) {
+	p.pos = pos
 }
