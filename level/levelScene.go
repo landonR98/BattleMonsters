@@ -15,7 +15,7 @@ type LevelScene struct {
 }
 
 func NewLevelScene(levelMap *maps.LevelMap) *LevelScene {
-	levelScene := LevelScene{levelMap: levelMap, camera: NewCamera(), player: NewPlayer(levelMap.GetPlayerSpawnPos())}
+	levelScene := LevelScene{levelMap: levelMap, camera: NewCamera(), player: NewPlayer(levelMap.GetPlayerSpawnPos(), "redChar.png")}
 	levelScene.canvas = levelScene.levelMap.CopyRenderTexture()
 	return &levelScene
 }
