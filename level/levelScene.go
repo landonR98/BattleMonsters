@@ -1,7 +1,9 @@
 package level
 
 import (
+	"battleMonsters/level/battle"
 	"battleMonsters/level/maps"
+	"battleMonsters/scene"
 	"fmt"
 	"math/rand"
 
@@ -30,7 +32,8 @@ func (levelScene *LevelScene) Update() {
 
 	if levelScene.player.IsMoving() && levelScene.levelMap.CheckGrassCollision(levelScene.player.GetHitBox()) {
 
-		if rand.Int31()%1000 == 1 {
+		if rand.Int31()%100 == 1 {
+			scene.GetManager().Push(battle.NewBattleScene())
 			fmt.Println("encounter")
 		}
 	}
