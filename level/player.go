@@ -10,6 +10,7 @@ type Player struct {
 	destRect   rl.Rectangle
 	pos        rl.Vector2
 	frameCount int
+	isMoving   bool
 }
 
 func NewPlayer(pos rl.Vector2, charSprites string) (player Player) {
@@ -34,7 +35,11 @@ func (player *Player) GetPos() rl.Vector2 {
 }
 
 func (p *Player) GetHitBox() rl.Rectangle {
-	return rl.NewRectangle(p.destRect.X+1, p.destRect.Y, p.destRect.Width, p.destRect.Height)
+	return rl.NewRectangle(p.destRect.X+3, p.destRect.Y, p.destRect.Width-6, p.destRect.Height)
+}
+
+func (p *Player) IsMoving() bool {
+	return p.isMoving
 }
 
 func (p *Player) Update() {
@@ -64,8 +69,10 @@ func (p *Player) Update() {
 
 	if velocity.X == 0 && velocity.Y == 0 {
 		p.frameCount = 0
+		p.isMoving = false
 	} else {
 		p.frameCount++
+		p.isMoving = true
 	}
 
 	animationFrame := (p.frameCount % 40) / 10

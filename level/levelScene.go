@@ -2,6 +2,8 @@ package level
 
 import (
 	"battleMonsters/level/maps"
+	"fmt"
+	"math/rand"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -25,6 +27,13 @@ func (levelScene *LevelScene) Update() {
 	levelScene.player.Update()
 
 	levelScene.camera.KeepInRect(levelScene.player.GetPos())
+
+	if levelScene.player.IsMoving() && levelScene.levelMap.CheckGrassCollision(levelScene.player.GetHitBox()) {
+
+		if rand.Int31()%1000 == 1 {
+			fmt.Println("encounter")
+		}
+	}
 
 }
 
