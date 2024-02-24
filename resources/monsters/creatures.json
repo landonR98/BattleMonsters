@@ -1,0 +1,303 @@
+{
+  "moves": [
+    {
+      "id": 0,
+      "name": "tackle",
+      "target": "opponent",
+      "damage": 1,
+      "effect": "null",
+      "effectChance": 0,
+      "cost": 1
+    },
+    {
+      "id": 1,
+      "name": "flame breath",
+      "target": "opponent",
+      "damage": 1,
+      "effect": "burn",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 2,
+      "name": "spit",
+      "target": "opponent",
+      "damage": 0,
+      "effect": "poison",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 3,
+      "name": "dodge",
+      "target": "self",
+      "damage": 0,
+      "effect": "defense",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 4,
+      "name": "block",
+      "target": "self",
+      "damage": 0,
+      "effect": "defense",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 5,
+      "name": "hypnotize",
+      "target": "opponent",
+      "damage": 0,
+      "effect": "sleep",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 6,
+      "name": "anesthetize",
+      "target": "self",
+      "damage": 1,
+      "effect": "health",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 7,
+      "name": "dark matter",
+      "target": "opponent",
+      "damage": 2,
+      "effect": "null",
+      "effectChance": 0,
+      "cost": 1
+    },
+    {
+      "id": 8,
+      "name": "sever",
+      "target": "opponent",
+      "damage": 1.5,
+      "effect": "null",
+      "effectChance": 0,
+      "cost": 1
+    },
+    {
+      "id": 9,
+      "name": "strip the soul",
+      "target": "opponent",
+      "damage": 2,
+      "effect": "null",
+      "effectChance": 0,
+      "cost": 1
+    },
+    {
+      "id": 10,
+      "name": "sleep of no dreaming",
+      "target": "opponent",
+      "damage": 0,
+      "effect": "coma",
+      "effectChance": 0.5,
+      "cost": 1
+    },
+    {
+      "id": 11,
+      "name": "Ashes",
+      "target": "opponent",
+      "damage": 0,
+      "effect": "burn",
+      "effectChance": 0.75,
+      "cost": 1
+    },
+    {
+      "id": 12,
+      "name": "Constrict",
+      "target": "opponent",
+      "damage": 0,
+      "effect": "Wrap",
+      "effectChance": 0.75,
+      "cost": 1
+    },
+    {
+      "id": 13,
+      "name": "Bite",
+      "target": "opponent",
+      "damage": 1,
+      "effect": "null",
+      "effectChance": 0,
+      "cost": 1
+    }
+  ],
+  "creatures":[
+    {
+      "id": 0,
+      "name": "green snake",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "stamina":40,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 1,
+      "name": "brown snake",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 0,
+          "y": 2
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 2,
+      "name": "red snake",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 0,
+          "y": 4
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 3,
+      "name": "pidgin",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 0,
+          "y": 6
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 4,
+      "name": "sea gall",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 4,
+          "y": 6
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 5,
+      "name": "rat",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 8,
+          "y": 6
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 6,
+      "name": "sheep",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 0,
+          "y": 10
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 6,
+      "name": "brown sheep",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 4,
+          "y": 10
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 6,
+      "name": "grey wolf",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 0,
+          "y": 12
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    },
+    {
+      "id": 6,
+      "name": "brown wolf",
+      "sprites":{
+        "sheet":"creatures.png",
+        "position": {
+          "x": 8,
+          "y": 14
+        }
+      },
+      "attack":15,
+      "health":200,
+      "defense":15,
+      "moves":[
+        2,5,12,13
+      ]
+    }
+  ]
+}
