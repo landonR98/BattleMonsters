@@ -127,7 +127,7 @@
       "cost": 1
     }
   ],
-  "creatures":[
+  "monsters":[
     {
       "id": 0,
       "name": "green snake",

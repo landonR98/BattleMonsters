@@ -3,6 +3,8 @@ package level
 import (
 	"battleMonsters/level/battle"
 	"battleMonsters/level/maps"
+	"battleMonsters/level/monster"
+	"battleMonsters/level/player"
 	"battleMonsters/scene"
 	"fmt"
 	"math/rand"
@@ -14,14 +16,33 @@ type LevelScene struct {
 	levelMap *maps.LevelMap
 	canvas   rl.RenderTexture2D
 	camera   Camera
-
-	player Player
+	monsters []monster.Monster
+	moves    []monster.Move
+	player   player.Player
 }
 
-func NewLevelScene(levelMap *maps.LevelMap) *LevelScene {
-	levelScene := LevelScene{levelMap: levelMap, camera: NewCamera(), player: NewPlayer(levelMap.GetPlayerSpawnPos(), "redChar.png")}
+func NewLevelScene(levelMap *maps.LevelMap, pl *player.Player) (LevelScene, error) {
+	moves, monsters, err := monster.LoadMonsters("./resources/monsters/creatures.json")
+	if err != nil {
+		return LevelScene{}, err
+	}
+
+	var level_player player.Player
+	if pl == nil {
+		level_player = player.NewPlayer(levelMap.GetPlayerSpawnPos(), "redChar.png", monsters[:1])
+	} else {
+		level_player = *pl
+	}
+
+	levelScene := LevelScene{
+		levelMap: levelMap,
+		camera:   NewCamera(),
+		player:   level_player,
+		monsters: monsters,
+		moves:    moves,
+	}
 	levelScene.canvas = levelScene.levelMap.CopyRenderTexture()
-	return &levelScene
+	return levelScene, nil
 }
 
 func (levelScene *LevelScene) Update() {
@@ -33,7 +54,7 @@ func (levelScene *LevelScene) Update() {
 	if levelScene.player.IsMoving() && levelScene.levelMap.CheckGrassCollision(levelScene.player.GetHitBox()) {
 
 		if rand.Int31()%100 == 1 {
-			scene.GetManager().Push(battle.NewBattleScene())
+			scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
 			fmt.Println("encounter")
 		}
 	}

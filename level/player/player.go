@@ -1,6 +1,8 @@
-package level
+package player
 
 import (
+	"battleMonsters/level/monster"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -11,10 +13,10 @@ type Player struct {
 	pos        rl.Vector2
 	frameCount int
 	isMoving   bool
-	monsters   []int
+	monsters   []monster.Monster
 }
 
-func NewPlayer(pos rl.Vector2, charSprites string) (player Player) {
+func NewPlayer(pos rl.Vector2, charSprites string, monsters []monster.Monster) (player Player) {
 	img := rl.LoadImage("./resources/characters/" + charSprites)
 	sprites := rl.LoadTextureFromImage(img)
 

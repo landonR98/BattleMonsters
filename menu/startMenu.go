@@ -76,6 +76,10 @@ func start() {
 		fmt.Println(err)
 		return
 	}
-	levelScene := level.NewLevelScene(levelMap)
-	scene.GetManager().Swap(levelScene)
+	levelScene, err := level.NewLevelScene(levelMap, nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	scene.GetManager().Swap(&levelScene)
 }

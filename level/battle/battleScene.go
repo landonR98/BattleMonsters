@@ -1,6 +1,8 @@
 package battle
 
 import (
+	"battleMonsters/level/monster"
+	"battleMonsters/level/player"
 	"battleMonsters/scene"
 	"battleMonsters/window"
 
@@ -9,14 +11,18 @@ import (
 )
 
 type BattleScene struct {
-	menu   rl.Rectangle
-	runBtn rl.Rectangle
+	player   *player.Player
+	monsters []monster.Monster
+	menu     rl.Rectangle
+	runBtn   rl.Rectangle
 }
 
-func NewBattleScene() *BattleScene {
+func NewBattleScene(player *player.Player, monsters []monster.Monster) *BattleScene {
 	return &BattleScene{
-		menu:   rl.NewRectangle(window.GameWidth-400, window.GameHeight-200, 400, 200),
-		runBtn: rl.NewRectangle(window.GameWidth-300, window.GameHeight-100, 100, 30),
+		player:   player,
+		monsters: monsters,
+		menu:     rl.NewRectangle(window.GameWidth-400, window.GameHeight-200, 400, 200),
+		runBtn:   rl.NewRectangle(window.GameWidth-300, window.GameHeight-100, 100, 30),
 	}
 }
 
