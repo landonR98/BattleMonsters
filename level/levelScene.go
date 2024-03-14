@@ -53,8 +53,9 @@ func (levelScene *LevelScene) Update() {
 
 	if levelScene.player.IsMoving() && levelScene.levelMap.CheckGrassCollision(levelScene.player.GetHitBox()) {
 
+		scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
 		if rand.Int31()%100 == 1 {
-			scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
+			//scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
 			fmt.Println("encounter")
 		}
 	}
