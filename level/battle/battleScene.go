@@ -184,7 +184,11 @@ func (b *BattleScene) Render(target rl.RenderTexture2D) {
 		rl.EndTextureMode()
 		return
 	default:
-		rl.DrawText(b.infoText, int32(window.GameWidth)-225, int32(window.GameHeight)-75, 18, rl.Black)
+		fontSize := int32(18)
+		textLength := rl.MeasureText(b.infoText, fontSize)
+		textX := ((b.menuBox.ToInt32().Width - textLength) / 2) + b.menuBox.ToInt32().X
+		textY := ((b.menuBox.ToInt32().Height - fontSize) / 2) + b.menuBox.ToInt32().Y
+		rl.DrawText(b.infoText, textX, textY, fontSize, rl.Black)
 	}
 
 	b.opponent.Draw()
