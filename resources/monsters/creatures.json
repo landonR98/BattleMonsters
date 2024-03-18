@@ -4,7 +4,7 @@
       "id": 0,
       "name": "tackle",
       "target": "opponent",
-      "damage": 1,
+      "damage": 2,
       "effect": "null",
       "effectChance": 0,
       "cost": 1
@@ -67,7 +67,7 @@
       "id": 7,
       "name": "dark matter",
       "target": "opponent",
-      "damage": 2,
+      "damage": 3,
       "effect": "null",
       "effectChance": 0,
       "cost": 1
@@ -85,7 +85,7 @@
       "id": 9,
       "name": "strip the soul",
       "target": "opponent",
-      "damage": 2,
+      "damage": 3,
       "effect": "null",
       "effectChance": 0,
       "cost": 1
@@ -121,7 +121,7 @@
       "id": 13,
       "name": "Bite",
       "target": "opponent",
-      "damage": 1,
+      "damage": 2,
       "effect": "null",
       "effectChance": 0,
       "cost": 1
@@ -143,7 +143,7 @@
       "defense":15,
       "stamina":40,
       "moves":[
-        2,5,12,13
+        2,3,12,13
       ]
     },
     {
@@ -160,7 +160,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        2,3,12,13
       ]
     },
     {
@@ -177,7 +177,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        2,3,12,13
       ]
     },
     {
@@ -194,7 +194,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        3,8,10,13
       ]
     },
     {
@@ -211,7 +211,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        3,8,10,13
       ]
     },
     {
@@ -228,7 +228,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        3,2,8,13
       ]
     },
     {
@@ -245,7 +245,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        0,2,4,13
       ]
     },
     {
@@ -262,7 +262,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        0,2,4,13
       ]
     },
     {
@@ -279,7 +279,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        0,2,4,13
       ]
     },
     {
@@ -296,7 +296,7 @@
       "health":200,
       "defense":15,
       "moves":[
-        2,5,12,13
+        0,2,4,13
       ]
     }
   ]

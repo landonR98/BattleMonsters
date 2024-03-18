@@ -1,21 +1,20 @@
 package monster
 
 import (
-	"math"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
+)
+
+type direction int
+
+const (
+	DIRECTION_UP direction = iota
+	DIRECTION_DOWN
 )
 
 type monsterSprites struct {
 	Sheet      rl.Texture2D
 	SourceRect rl.Rectangle
 	TargetRect rl.Rectangle
-}
-
-type animationData struct {
-	frameCount   int
-	startPos     rl.Vector2
-	takingDamage bool
 }
 
 type Monster struct {
@@ -29,14 +28,14 @@ type Monster struct {
 	Stamina    int
 	Moves      []Move
 	FrameCount int
-	animation  animationData
+	animation  MonsterAnimator
 }
 
 func NewMonster(m monsterModel, moves []Move) Monster {
 
-	monster_moves := make([]Move, 0, len(m.Moves))
+	monsterMoves := make([]Move, 0, len(m.Moves))
 	for _, move_id := range m.Moves {
-		monster_moves = append(monster_moves, moves[move_id])
+		monsterMoves = append(monsterMoves, moves[move_id])
 	}
 
 	texture := rl.LoadTexture("./resources/monsters/" + m.Sprites.Sheet)
@@ -54,38 +53,60 @@ func NewMonster(m monsterModel, moves []Move) Monster {
 		Health:     m.Health,
 		MaxStamina: m.Stamina,
 		Stamina:    m.Stamina,
-		Moves:      monster_moves,
+		Moves:      monsterMoves,
 		Sprites: monsterSprites{
 			Sheet:      spriteSheet.Texture,
-			SourceRect: rl.NewRectangle(0, 0, 16, 16),
+			SourceRect: rl.NewRectangle(0, 0, 16, -16),
 		},
-		animation: animationData{
-			frameCount:   0,
-			takingDamage: false,
-		},
+		animation: nil,
 	}
 }
 
-func (m Monster) Update() {
-	if m.animation.takingDamage {
-		change := float32((math.Exp2(float64(m.animation.frameCount-30)) / 22.5) + 40)
-		m.Sprites.TargetRect.X = m.animation.startPos.X + change
-		m.Sprites.TargetRect.Y = m.animation.startPos.Y + change
+func (m *Monster) Update() (hasAnimation bool) {
+	if m.animation != nil {
+		x, y, finished := m.animation.Tick()
+		m.Sprites.TargetRect.X = x
+		m.Sprites.TargetRect.Y = y
 
-		if m.animation.frameCount > 60 {
-			m.animation.takingDamage = false
-			m.animation.frameCount = 0
+		if finished {
+			m.animation = nil
+			return false
 		} else {
-			m.animation.frameCount++
+			return true
 		}
 	}
+	return false
 }
 
 func (m Monster) Draw() {
 	rl.DrawTexturePro(m.Sprites.Sheet, m.Sprites.SourceRect, m.Sprites.TargetRect, rl.NewVector2(0, 0), 0, rl.White)
 }
 
-func (m Monster) SetPosition(pos rl.Vector2, width float32, height float32) {
+func (m *Monster) SetPosition(pos rl.Vector2, width float32, height float32) {
 	m.Sprites.TargetRect = rl.NewRectangle(pos.X, pos.Y, width, height)
-	m.animation.startPos = pos
+}
+
+func (m *Monster) SetDirection(dir direction) {
+	switch dir {
+	case DIRECTION_UP:
+		m.Sprites.SourceRect.Y = 0
+	case DIRECTION_DOWN:
+		m.Sprites.SourceRect.Y = 16
+	}
+}
+
+func (m *Monster) SetAnimator(animation MonsterAnimator) {
+	m.animation = animation
+}
+
+func (m Monster) GetPosition() rl.Vector2 {
+	return rl.NewVector2(m.Sprites.TargetRect.X, m.Sprites.TargetRect.Y)
+}
+
+func (m *Monster) TakeDamage(damage int) {
+	m.Health -= damage
+	if m.Health < 0 {
+		m.Health = 0
+	}
+
 }

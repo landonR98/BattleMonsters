@@ -13,7 +13,7 @@ type Player struct {
 	pos        rl.Vector2
 	frameCount int
 	isMoving   bool
-	monsters   []monster.Monster
+	Monsters   []monster.Monster
 }
 
 func NewPlayer(pos rl.Vector2, charSprites string, monsters []monster.Monster) (player Player) {
@@ -25,6 +25,7 @@ func NewPlayer(pos rl.Vector2, charSprites string, monsters []monster.Monster) (
 	player.destRect = rl.NewRectangle(0, 0, 16, 16)
 	player.pos = pos
 	player.frameCount = 0
+	player.Monsters = monsters
 
 	return player
 }
@@ -33,8 +34,8 @@ func (p *Player) Draw() {
 	rl.DrawTexturePro(p.sprites, p.srcRect, p.destRect, rl.NewVector2(0, 0), 0, rl.White)
 }
 
-func (player *Player) GetPos() rl.Vector2 {
-	return player.pos
+func (p *Player) GetPos() rl.Vector2 {
+	return p.pos
 }
 
 func (p *Player) GetHitBox() rl.Rectangle {
