@@ -6,7 +6,6 @@ import (
 	"battleMonsters/level/monster"
 	"battleMonsters/level/player"
 	"battleMonsters/scene"
-	"fmt"
 	"math/rand"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -53,10 +52,9 @@ func (levelScene *LevelScene) Update() {
 
 	if levelScene.player.IsMoving() && levelScene.levelMap.CheckGrassCollision(levelScene.player.GetHitBox()) {
 
-		scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
+		// scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
 		if rand.Int31()%100 == 1 {
-			//scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
-			fmt.Println("encounter")
+			scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
 		}
 	}
 
