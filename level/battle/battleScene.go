@@ -53,9 +53,6 @@ func NewBattleScene(player *player.Player, monsters []monster.Monster) *BattleSc
 		player.Monsters[i].SetPosition(rl.NewVector2(100, window.GameHeight-(monsterSize+50)), monsterSize, monsterSize)
 	}
 
-	fmt.Println(monsterSlice[0].Sprites.TargetRect)
-	fmt.Println(player.Monsters[0].Sprites.TargetRect)
-
 	btnWidth := float32(100)
 	btnHeight := float32(30)
 
@@ -214,6 +211,5 @@ func drawMonsterStats(x, y int32, mons *monster.Monster) {
 	for j := 0; j < damageTaken; j++ {
 		damageStr += " "
 	}
-	fmt.Println(mons.Name, damageTaken, remainingHealth, healthPercent)
 	rl.DrawText(fmt.Sprintf("<(%s%s)>", healthStr, damageStr), x, y+25, 20, rl.Black)
 }
