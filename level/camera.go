@@ -33,17 +33,24 @@ func (c *Camera) SetPos(pos rl.Vector2) {
 }
 
 func (c *Camera) KeepInRect(pos rl.Vector2) {
+	cameraHeight := c.source.Height * -1
 	vec := rl.NewVector2(pos.X, pos.Y*-1)
 	borderWidth := c.source.Width / 3
-	borderHeight := c.source.Height / 3
+	borderHeight := cameraHeight / 3
 	if vec.X < (c.pos.X + borderWidth) {
+		// move right
 		c.pos.X = vec.X - borderWidth
 	} else if vec.X > ((c.pos.X + c.source.Width) - borderWidth) {
+		// move left
 		c.pos.X = vec.X - c.source.Width + borderWidth
 	}
-	if vec.Y < (c.pos.Y - borderHeight) {
-		c.pos.Y = vec.Y + borderHeight
-	} else if vec.Y > (c.pos.Y - c.source.Height + borderHeight) {
-		c.pos.Y = vec.Y + c.source.Height - borderHeight
+
+	if vec.Y < (c.pos.Y + borderHeight) {
+		// move down
+		c.pos.Y = vec.Y - borderHeight
+	} else if vec.Y > (c.pos.Y + cameraHeight - (borderHeight / 2)) {
+		// I don't understand why I need to half the border height here but it works
+		// move up
+		c.pos.Y = vec.Y - cameraHeight + (borderHeight / 2)
 	}
 }
