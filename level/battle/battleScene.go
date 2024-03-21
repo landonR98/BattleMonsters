@@ -180,7 +180,6 @@ func (b *BattleScene) Render(target rl.RenderTexture2D) {
 				b.opponent.TakeDamage(int(move.Damage) * b.playerMonster.Attack)
 			}
 		}
-
 	case STATE_WIN, STATE_LOOSE:
 		rl.EndTextureMode()
 		return
