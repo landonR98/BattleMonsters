@@ -6,7 +6,10 @@ import (
 	"battleMonsters/level/monster"
 	"battleMonsters/level/player"
 	"battleMonsters/scene"
+	"encoding/json"
+	"fmt"
 	"math/rand"
+	"os"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -20,8 +23,31 @@ type LevelScene struct {
 	player   player.Player
 }
 
-func NewLevelScene(levelMap *maps.LevelMap, pl *player.Player) (LevelScene, error) {
-	moves, monsters, err := monster.LoadMonsters("./resources/monsters/creatures.json")
+func NewLevelScene(levelPath string, pl *player.Player) (LevelScene, error) {
+	var levelData map[string]string
+
+	data, err := os.ReadFile("resources/levels/level1.json")
+	if err != nil {
+		fmt.Println(err)
+		return LevelScene{}, err
+	}
+
+	err = json.Unmarshal(data, &levelData)
+	if err != nil {
+		fmt.Println(err)
+		return LevelScene{}, err
+	}
+
+	mapPath := levelData["map"]
+	monsterPath := levelData["monsters"]
+
+	levelMap, err := maps.LoadMapFromFile(mapPath)
+	if err != nil {
+		fmt.Println(err)
+		return LevelScene{}, err
+	}
+
+	moves, monsters, err := monster.LoadMonsters(monsterPath)
 	if err != nil {
 		return LevelScene{}, err
 	}

@@ -137,7 +137,6 @@ func (b *BattleScene) Update() {
 	case STATE_WIN:
 		scene.GetManager().Swap(textDisplay.NewTextDisplayTransition("You Have Won", 30, 60))
 	}
-
 }
 
 func (b *BattleScene) Render(target rl.RenderTexture2D) {

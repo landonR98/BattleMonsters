@@ -1,0 +1,4 @@
+{
+  "map":"./resources/maps/grassMap.tmj",
+  "monsters":"./resources/monsters/creatures.json"
+}

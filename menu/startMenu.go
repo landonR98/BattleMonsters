@@ -2,7 +2,6 @@ package menu
 
 import (
 	"battleMonsters/level"
-	"battleMonsters/level/maps"
 	"battleMonsters/scene"
 	"battleMonsters/window"
 	"fmt"
@@ -61,7 +60,6 @@ func (startMenu *StartMenu) Render(target rl.RenderTexture2D) {
 
 	if gui.Button(startMenu.startRect, "Start") {
 		fmt.Println("btn press")
-		// scene.GetManager().Swap(level.NewLevelScene())
 		start()
 	} else if gui.Button(startMenu.settingsRect, "Settings") {
 		fmt.Println("settings")
@@ -71,15 +69,10 @@ func (startMenu *StartMenu) Render(target rl.RenderTexture2D) {
 }
 
 func start() {
-	levelMap, err := maps.LoadMapFromFile("./resources/maps/grassMap.tmj")
+	levelScene, err := level.NewLevelScene("resources/levels/level1.json", nil)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	levelScene, err := level.NewLevelScene(levelMap, nil)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	scene.GetManager().Swap(&levelScene)
+	scene.GetManager().Push(&levelScene)
 }
