@@ -71,6 +71,9 @@ func NewLevelScene(levelPath string, pl *player.Player) (LevelScene, error) {
 }
 
 func (levelScene *LevelScene) Update() {
+	if levelScene.player.IsDead {
+		scene.GetManager().Pop()
+	}
 
 	levelScene.player.Update()
 
@@ -83,7 +86,6 @@ func (levelScene *LevelScene) Update() {
 			scene.GetManager().Push(battle.NewBattleScene(&levelScene.player, levelScene.monsters))
 		}
 	}
-
 }
 
 func (levelScene *LevelScene) Render(target rl.RenderTexture2D) {

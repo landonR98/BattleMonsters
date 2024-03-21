@@ -13,6 +13,7 @@ type Player struct {
 	pos        rl.Vector2
 	frameCount int
 	isMoving   bool
+	IsDead     bool
 	Monsters   []monster.Monster
 }
 
@@ -26,6 +27,7 @@ func NewPlayer(pos rl.Vector2, charSprites string, monsters []monster.Monster) (
 	player.pos = pos
 	player.frameCount = 0
 	player.Monsters = monsters
+	player.IsDead = false
 
 	return player
 }

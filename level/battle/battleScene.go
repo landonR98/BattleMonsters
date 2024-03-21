@@ -133,7 +133,9 @@ func (b *BattleScene) Update() {
 	case STATE_CATCHING:
 		b.infoText = "Catching..."
 	case STATE_LOOSE:
-		scene.GetManager().Swap(textDisplay.NewTextDisplayTransition("You Have Lost", 30, 60))
+		b.player.IsDead = true
+		scene.GetManager().Swap(textDisplay.NewTextDisplayTransition("Game Over", 30, 60))
+		scene.GetManager().Push(textDisplay.NewTextDisplayTransition("You Have Lost", 30, 60))
 	case STATE_WIN:
 		scene.GetManager().Swap(textDisplay.NewTextDisplayTransition("You Have Won", 30, 60))
 	}
