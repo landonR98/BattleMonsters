@@ -1,4 +1,4 @@
-package scene
+package scenes
 
 type SceneManager struct {
 	scenes []Scene

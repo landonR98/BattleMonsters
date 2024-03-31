@@ -1,7 +1,7 @@
 package player
 
 import (
-	"battleMonsters/level/monster"
+	"battleMonsters/scenes/level/monster"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )

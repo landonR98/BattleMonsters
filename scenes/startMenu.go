@@ -1,21 +1,22 @@
-package menu
+package scenes
 
 import (
-	"battleMonsters/level"
-	"battleMonsters/scene"
 	"battleMonsters/window"
 	"fmt"
+	"net/http"
+	"net/url"
 
 	gui "github.com/gen2brain/raylib-go/raygui"
 	rl "github.com/gen2brain/raylib-go/raylib"
+	"github.com/gorilla/websocket"
 )
 
 type StartMenu struct {
-	startRect    rl.Rectangle
-	settingsRect rl.Rectangle
-	title        rl.RenderTexture2D
-	titleRect    rl.Rectangle
-	titleDest    rl.Rectangle
+	startRect       rl.Rectangle
+	multiplayerRect rl.Rectangle
+	title           rl.RenderTexture2D
+	titleRect       rl.Rectangle
+	titleDest       rl.Rectangle
 }
 
 func NewStartMenu() *StartMenu {
@@ -38,11 +39,11 @@ func NewStartMenu() *StartMenu {
 	btnX := halfScreen - (btnWidth / 2)
 
 	startMenu := StartMenu{
-		startRect:    rl.NewRectangle(btnX, 300, btnWidth, btnHeight),
-		settingsRect: rl.NewRectangle(btnX, 400, btnWidth, btnHeight),
-		title:        title,
-		titleRect:    titleRect,
-		titleDest:    titleDest,
+		startRect:       rl.NewRectangle(btnX, 300, btnWidth, btnHeight),
+		multiplayerRect: rl.NewRectangle(btnX, 400, btnWidth, btnHeight),
+		title:           title,
+		titleRect:       titleRect,
+		titleDest:       titleDest,
 	}
 	return &startMenu
 }
@@ -58,21 +59,40 @@ func (startMenu *StartMenu) Render(target rl.RenderTexture2D) {
 
 	rl.DrawTexturePro(startMenu.title.Texture, startMenu.titleRect, startMenu.titleDest, rl.NewVector2(0, 0), 0, rl.White)
 
-	if gui.Button(startMenu.startRect, "Start") {
-		fmt.Println("btn press")
+	if gui.Button(startMenu.startRect, "Start Game") {
 		start()
-	} else if gui.Button(startMenu.settingsRect, "Settings") {
-		fmt.Println("settings")
+	} else if gui.Button(startMenu.multiplayerRect, "Multiplayer") {
+		startMultiplayer()
 	}
 
 	rl.EndTextureMode()
 }
 
 func start() {
-	levelScene, err := level.NewLevelScene("resources/levels/level1.json", nil)
+	levelScene, err := NewLevelScene("resources/levels/level1.json", nil)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	scene.GetManager().Push(&levelScene)
+	GetManager().Push(&levelScene)
+}
+
+func startMultiplayer() {
+	u := url.URL{Scheme: "ws", Host: "localhost:3000", Path: "/ws"}
+	conn, resp, err := websocket.DefaultDialer.Dial(u.String(), nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if resp.StatusCode != http.StatusSwitchingProtocols {
+		fmt.Println("Connection Error: Bad Status", resp.StatusCode)
+	}
+
+	levelScene, err := NewMultiplayerLevelScene("resources/levels/level1.json", nil, conn)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	GetManager().Push(&levelScene)
 }

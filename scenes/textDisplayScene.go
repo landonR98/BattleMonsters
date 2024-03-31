@@ -1,7 +1,6 @@
-package textDisplay
+package scenes
 
 import (
-	"battleMonsters/scene"
 	"battleMonsters/window"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -19,7 +18,7 @@ func (t *textDisplayTransition) Update() {
 	t.frameCount++
 
 	if t.frameCount >= t.length {
-		scene.GetManager().Pop()
+		GetManager().Pop()
 	}
 }
 

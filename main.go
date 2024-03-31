@@ -1,8 +1,7 @@
 package main
 
 import (
-	"battleMonsters/menu"
-	"battleMonsters/scene"
+	"battleMonsters/scenes"
 	"battleMonsters/window"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -22,9 +21,9 @@ func main() {
 	rl.SetExitKey(0)
 	rl.SetTargetFPS(60)
 
-	scene.Init(menu.NewStartMenu())
+	scenes.Init(scenes.NewStartMenu())
 
-	sceneManager := scene.GetManager()
+	sceneManager := scenes.GetManager()
 
 	for !rl.WindowShouldClose() {
 		sceneManager.GetCurrent().Update()

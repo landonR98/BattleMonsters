@@ -54,3 +54,7 @@ func (c *Camera) KeepInRect(pos rl.Vector2) {
 		c.pos.Y = vec.Y - cameraHeight + (borderHeight / 2)
 	}
 }
+
+func (c Camera) GetPos() rl.Vector2 {
+	return rl.NewVector2(c.pos.X, c.pos.Y)
+}

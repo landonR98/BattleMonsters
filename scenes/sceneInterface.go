@@ -1,4 +1,4 @@
-package scene
+package scenes
 
 import rl "github.com/gen2brain/raylib-go/raylib"
 

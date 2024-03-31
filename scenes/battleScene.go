@@ -1,10 +1,8 @@
-package battle
+package scenes
 
 import (
-	"battleMonsters/level/monster"
-	"battleMonsters/level/player"
-	"battleMonsters/scene"
-	"battleMonsters/transition/textDisplay"
+	"battleMonsters/scenes/level/monster"
+	"battleMonsters/scenes/level/player"
 	"battleMonsters/window"
 	"fmt"
 	"math/rand"
@@ -134,10 +132,10 @@ func (b *BattleScene) Update() {
 		b.infoText = "Catching..."
 	case STATE_LOOSE:
 		b.player.IsDead = true
-		scene.GetManager().Swap(textDisplay.NewTextDisplayTransition("Game Over", 30, 60))
-		scene.GetManager().Push(textDisplay.NewTextDisplayTransition("You Have Lost", 30, 60))
+		GetManager().Swap(NewTextDisplayTransition("Game Over", 30, 60))
+		GetManager().Push(NewTextDisplayTransition("You Have Lost", 30, 60))
 	case STATE_WIN:
-		scene.GetManager().Swap(textDisplay.NewTextDisplayTransition("You Have Won", 30, 60))
+		GetManager().Swap(NewTextDisplayTransition("You Have Won", 30, 60))
 	}
 }
 
@@ -151,7 +149,7 @@ func (b *BattleScene) Render(target rl.RenderTexture2D) {
 	switch b.state {
 	case STATE_CHOICE:
 		if gui.Button(b.blBtn, "run") {
-			scene.GetManager().Pop()
+			GetManager().Pop()
 		}
 
 		if gui.Button(b.tlBtn, "catch") {
@@ -163,7 +161,7 @@ func (b *BattleScene) Render(target rl.RenderTexture2D) {
 		}
 
 		if gui.Button(b.trBtn, "monsters") {
-			scene.GetManager().Pop()
+			GetManager().Pop()
 		}
 	case STATE_CHOSE_MOVE:
 		btns := []rl.Rectangle{b.tlBtn, b.blBtn, b.trBtn, b.brBtn}
